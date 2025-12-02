@@ -1,1 +1,1 @@
-# Information-Age-Artificial-Intelligence
+This project is a web-based exploration of The Information Age and Artificial Intelligence (AI), developed as part of the Science, Technology, and Society course. The website is designed to inform users about the historical development, characteristics, impacts, and ethical, social, and technical challenges of the Information Age and AI. It integrates interactive content such as tables, bullet points, and multimedia elements to enhance learning and engagement.
