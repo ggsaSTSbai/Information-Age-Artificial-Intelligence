@@ -22,6 +22,14 @@ const quizBox = document.getElementById("quiz-box");
 const resultBox = document.getElementById("results");
 const scoreLabel = document.getElementById("score");
 
+// --- ADD FEEDBACK ELEMENT ---
+const feedbackQuiz = document.createElement('p');
+feedbackQuiz.id = "quiz-feedback";
+feedbackQuiz.style.fontSize = "1.2em";
+feedbackQuiz.style.marginTop = "10px";
+quizBox.appendChild(feedbackQuiz);
+
+// LOAD FIRST QUESTION
 loadQuestion();
 
 // LOAD QUESTION
@@ -31,19 +39,40 @@ function loadQuestion() {
     progress.textContent = `${index + 1} / ${quizData.length}`;
 }
 
+// DISABLE / ENABLE CHOICE BUTTONS
+function disableChoices(disabled) {
+    document.querySelectorAll('.choice-btn').forEach(btn => btn.disabled = disabled);
+}
+
 // USER ANSWERS
 function answer(choice) {
-    if (choice === quizData[index].answer) {
+    const correctAnswer = quizData[index].answer;
+
+    // Show immediate feedback
+    if (choice === correctAnswer) {
         score++;
-    }
-
-    index++;
-
-    if (index < quizData.length) {
-        loadQuestion();
+        feedbackQuiz.textContent = `✅ Correct!`;
+        feedbackQuiz.style.color = "#4cc9f0";
     } else {
-        showResults();
+        feedbackQuiz.textContent = `❌ Incorrect! Correct answer: ${correctAnswer.toUpperCase()}`;
+        feedbackQuiz.style.color = "#ff4c4c";
     }
+
+    // Disable buttons temporarily to prevent multiple clicks
+    disableChoices(true);
+
+    // Move to next question after a short delay
+    setTimeout(() => {
+        index++;
+        feedbackQuiz.textContent = ""; // clear feedback
+        disableChoices(false); // re-enable buttons
+
+        if (index < quizData.length) {
+            loadQuestion();
+        } else {
+            showResults();
+        }
+    }, 1500); // 1.5 seconds delay so user can see feedback
 }
 
 // SHOW RESULTS
@@ -62,6 +91,7 @@ function restartQuiz() {
     loadQuestion();
 }
 
+// === DRAG & DROP QUIZ ===
 const tools = document.querySelectorAll('.ai-tool');
 const categories = document.querySelectorAll('.category');
 const feedback = document.getElementById('match-feedback');
