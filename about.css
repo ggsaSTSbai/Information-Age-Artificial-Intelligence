@@ -178,6 +178,17 @@ html {
   text-shadow: 0 0 8px #4cc9f0;
 }
 
+.overview-box {
+  background: rgba(6, 1, 36, 0.27); 
+  padding: 7px 30px;
+  padding-top: 40px;
+  border-radius: 15px;
+  max-width: 900px;
+  margin: 0 auto 50px auto;
+  backdrop-filter: blur(1px);  
+  box-shadow: 0 10px 20px rgba(102, 211, 244, 0.3); 
+}
+
 /* Overview Section */
 .overview-text {
   font-size: 1.1rem;
